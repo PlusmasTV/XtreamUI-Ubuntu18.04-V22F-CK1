@@ -5,7 +5,7 @@ from itertools import cycle, izip
 from zipfile import ZipFile
 from urllib2 import Request, urlopen, URLError, HTTPError
 
-rDownloadURL = {"main": "http://xtream-ui.org/main_xtreamcodes_reborn.tar.gz", "sub": "http://xtream-ui.org/sub_xtreamcodes_reborn.tar.gz"}
+rDownloadURL = {"main": "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-22-CK/main_xtreamcodes_reborn.tar.gz", "sub": "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-22-CK/sub_xtreamcodes_reborn.tar.gz"}
 rPackages = ["libcurl3", "libxslt1-dev", "libgeoip-dev", "e2fsprogs", "wget", "mcrypt", "nscd", "htop", "zip", "unzip", "mc", "libjemalloc1", "python-paramiko", "mysql-server"]
 rInstall = {"MAIN": "main", "LB": "sub"}
 rUpdate = {"UPDATE": "update"}
@@ -58,7 +58,7 @@ def prepare(rType="MAIN"):
         printc("Installing %s" % rPackage)
         os.system("apt-get install %s -y > /dev/null" % rPackage)
     printc("Installing libpng")
-    os.system("wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb")
+    os.system("wget -q -O /tmp/libpng12.deb ://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb")
     os.system("dpkg -i /tmp/libpng12.deb > /dev/null")
     os.system("apt-get install -y > /dev/null") # Clean up above
     try: os.remove("/tmp/libpng12.deb")
@@ -93,9 +93,9 @@ def install(rType="MAIN"):
 def update(rType="MAIN"):
     if rType == "UPDATE":
         printc("Enter the link of release_xyz.zip file:", col.WARNING)
-        rlink = raw_input('Example: https://github.com/xtream-ui-org/xtream-ui-install/raw/master/files/release_22f.zip\n\nNow enter the link:\n\n')
+        rlink = raw_input('Example: https://github.com/PlusmasTV/XtreamUI-Ubuntu18.04/raw/main/files/release_22f.zip\n\nNow enter the link:\n\n')
     else:
-        rlink = "https://github.com/xtream-ui-org/xtream-ui-install/raw/master/files/release_22f.zip"
+        rlink = "https://github.com/PlusmasTV/XtreamUI-Ubuntu18.04/raw/main/files/release_22f.zip"
         printc("Installing Admin Panel")
     hdr = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -199,12 +199,12 @@ def configure():
     except: pass
     if rType == "MAIN": 
         # edited these 2 files return api response without main server ip, it is usefull if you use a proxy in front of your main server.
-        os.system("mv /home/xtreamcodes/iptv_xtream_codes/wwwdir/panel_api.php /home/xtreamcodes/iptv_xtream_codes/wwwdir/.panel_api_original.php && wget -q https://github.com/xtream-ui-org/xtream-ui-install/raw/master/files/panel_api.php -O /home/xtreamcodes/iptv_xtream_codes/wwwdir/panel_api.php")
-        os.system("mv /home/xtreamcodes/iptv_xtream_codes/wwwdir/player_api.php /home/xtreamcodes/iptv_xtream_codes/wwwdir/.player_api_original.php && wget -q https://github.com/xtream-ui-org/xtream-ui-install/raw/master/files/player_api.php -O /home/xtreamcodes/iptv_xtream_codes/wwwdir/player_api.php")
+        os.system("mv /home/xtreamcodes/iptv_xtream_codes/wwwdir/panel_api.php /home/xtreamcodes/iptv_xtream_codes/wwwdir/.panel_api_original.php && wget -q https://raw.githubusercontent.com/PlusmasTV/XtreamUI-Ubuntu18.04/main/files/panel_api.php -O /home/xtreamcodes/iptv_xtream_codes/wwwdir/panel_api.php")
+        os.system("mv /home/xtreamcodes/iptv_xtream_codes/wwwdir/player_api.php /home/xtreamcodes/iptv_xtream_codes/wwwdir/.player_api_original.php && wget -q https://raw.githubusercontent.com/PlusmasTV/XtreamUI-Ubuntu18.04/main/files/player_api.php -O /home/xtreamcodes/iptv_xtream_codes/wwwdir/player_api.php")
     if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/tv_archive"): os.mkdir("/home/xtreamcodes/iptv_xtream_codes/tv_archive/")
     os.system("ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/")
-    os.system("wget -q https://github.com/xtream-ui-org/xtream-ui-install/raw/master/files/GeoLite2.mmdb -O /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
-    os.system("wget -q https://github.com/xtream-ui-org/xtream-ui-install/raw/master/files/pid_monitor.php -O /home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php")
+    os.system("wget -q https://github.com/PlusmasTV/XtreamUI-Ubuntu18.04/raw/main/files/GeoLite2.mmdb -O /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
+    os.system("wget -q https://raw.githubusercontent.com/PlusmasTV/XtreamUI-Ubuntu18.04/main/files/pid_monitor.php -O /home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php")
     os.system("chown xtreamcodes:xtreamcodes -R /home/xtreamcodes > /dev/null")
     os.system("chmod -R 0777 /home/xtreamcodes > /dev/null")
     os.system("chattr +i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb > /dev/null")
