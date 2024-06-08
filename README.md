@@ -7,36 +7,17 @@ This is an installation mirror for xtream ui software.
 
 update your ubuntu first, then install panel  
 
-
-
-I) TERMINAL COMO SUPER ADMINISTRADOR:
-
-sudo su
-apt-get upgrade
-apt-get update
-apt install net-tools
-
-
-
-
-II) ADICIONAR MIRROR PARA ACTUALIZAR REPOSITORIOS/PAQUETES:
-
-cd /usr/src
-nano /etc/apt/sources.list (nota: anadir esta linea : 
-deb http://mirrors.us.kernel.org/ubuntu/ xenial main
-sudo apt-get update
-sudo apt-get install libpng12-0
-
-
-
-
-III) TERMINAL COMO SUPER ADMINISTRADOR:
-  
-sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libxslt1-dev libcurl3 libgeoip-dev python -y;
-
-wget https://raw.githubusercontent.com/PlusmasTV/XtreamUI-Ubuntu18.04/main/install_XCUI.py; 
-
-sudo python install_XCUI.py  
+- sudo su
+- apt-get upgrade
+- apt-get update
+- apt install net-tools
+- cd /usr/src
+- nano /etc/apt/sources.list (nota: anadir esta linea : deb http://mirrors.us.kernel.org/ubuntu/ xenial main 
+- sudo apt-get update
+- sudo apt-get install libpng12-0
+- sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libxslt1-dev libcurl3 libgeoip-dev python -y;
+- wget https://raw.githubusercontent.com/PlusmasTV/XtreamUI-Ubuntu18.04/main/install_XCUI.py; 
+- sudo python install_XCUI.py  
 
   
 If you want to install main server with admin panel, choose MAIN.  
