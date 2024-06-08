@@ -30,11 +30,11 @@ def getVersion():
     except: return ""
 
 def printc(rText, rColour=col.OKBLUE, rPadding=0):
-    print "%s â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” %s" % (rColour, col.ENDC)
-    for i in range(rPadding): print "%s â”‚                                          â”‚ %s" % (rColour, col.ENDC)
-    print "%s â”‚ %s%s%s â”‚ %s" % (rColour, " "*(20-(len(rText)/2)), rText, " "*(40-(20-(len(rText)/2))-len(rText)), col.ENDC)
-    for i in range(rPadding): print "%s â”‚                                          â”‚ %s" % (rColour, col.ENDC)
-    print "%s â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ %s" % (rColour, col.ENDC)
+    print "%s ┌──────────────────────────────────────────┐ %s" % (rColour, col.ENDC)
+    for i in range(rPadding): print "%s │                                          │ %s" % (rColour, col.ENDC)
+    print "%s │ %s%s%s │ %s" % (rColour, " "*(20-(len(rText)/2)), rText, " "*(40-(20-(len(rText)/2))-len(rText)), col.ENDC)
+    for i in range(rPadding): print "%s │                                          │ %s" % (rColour, col.ENDC)
+    print "%s └──────────────────────────────────────────┘ %s" % (rColour, col.ENDC)
     print " "
 
 def prepare(rType="MAIN"):
@@ -175,7 +175,7 @@ def modifyNginx():
         rFile.close()
 
 if __name__ == "__main__":
-    printc("Xtream UI 22 CK MODS - Installer", col.OKGREEN, 2)
+    printc("XtreamUI CK41 MOD", col.OKGREEN, 2)
     rType = raw_input("  Installation Type [MAIN, LB]: ")
     print " "
     if rType.upper() in ["MAIN", "LB"]:
@@ -204,7 +204,7 @@ if __name__ == "__main__":
                 configure()
                 if rType.upper() == "MAIN": modifyNginx()
                 start()
-                printc("Xtream UI 22 CK MODS completed!", col.OKGREEN, 2)
+                printc("XtreamUI CK41 MOD", col.OKGREEN, 2)
                 printc("Admin UI: http://%s:25500" % getIP())
                 if rType.upper() == "MAIN":
                     printc("Please store your MySQL password!")
