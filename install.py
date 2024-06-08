@@ -4,7 +4,7 @@ import subprocess, os, random, string, sys, shutil, socket, zipfile, urllib2, ba
 from itertools import cycle, izip
 from zipfile import ZipFile
 
-rDownloadURL = {"main": "https://bitbucket.org/emre1393/xtreamui_mirror/downloads/main_xtreamcodes_reborn.tar.gz", "sub": "https://bitbucket.org/emre1393/xtreamui_mirror/downloads/sub_xtreamcodes_reborn.tar.gz"}
+rDownloadURL = {"main": "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI22CKMODS7/main_xtreamcodes_reborn.tar.gz", "sub": "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI22CKMODS7/sub_xtreamcodes_reborn.tar.gz"}
 rPackages = ["libcurl3", "libxslt1-dev", "libgeoip-dev", "e2fsprogs", "wget", "mcrypt", "nscd", "htop", "zip", "unzip", "mc", "libjemalloc1", "python-paramiko", "mariadb-server"]
 rInstall = {"MAIN": "main", "LB": "sub"}
 rMySQLCnf = "IyBYdHJlYW0gQ29kZXMKW2NsaWVudF0KcG9ydCAgICAgICAgICAgICAgICAgICAgICAgICAgICA9IDMzMDYKCltteXNxbGRfc2FmZV0KbmljZSAgICAgICAgICAgICAgICAgICAgICAgICAgICA9IDAKI21hbGxvYyBzZXR0aW5ncwptYWxsb2MtbGliPS91c3IvbGliL3g4Nl82NC1saW51eC1nbnUvbGlidGNtYWxsb2Muc28uNC4zLjAKCltteXNxbGRdCnVzZXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgPSBteXNxbApwb3J0ICAgICAgICAgICAgICAgICAgICAgICAgICAgID0gNzk5OQpiYXNlZGlyICAgICAgICAgICAgICAgICAgICAgICAgID0gL3VzcgpkYXRhZGlyICAgICAgICAgICAgICAgICAgICAgICAgID0gL3Zhci9saWIvbXlzcWwKdG1wZGlyICAgICAgICAgICAgICAgICAgICAgICAgICA9IC90bXAKbGMtbWVzc2FnZXMtZGlyICAgICAgICAgICAgICAgICA9IC91c3Ivc2hhcmUvbXlzcWwKc2tpcC1leHRlcm5hbC1sb2NraW5nCnNraXAtbmFtZS1yZXNvbHZlICAgICAgICAgICAgICAgPTEKYmluZC1hZGRyZXNzICAgICAgICAgICAgICAgICAgICA9ICoKCmtleV9idWZmZXJfc2l6ZSAgICAgICAgICAgICAgICAgPSAxMjhNCm15aXNhbV9zb3J0X2J1ZmZlcl9zaXplICAgICAgICAgPSA0TQptYXhfYWxsb3dlZF9wYWNrZXQgICAgICAgICAgICAgID0gNjRNCm15aXNhbS1yZWNvdmVyLW9wdGlvbnMgICAgICAgICAgPSBCQUNLVVAKbWF4X2xlbmd0aF9mb3Jfc29ydF9kYXRhICAgICAgICA9IDgxOTIKcXVlcnlfY2FjaGVfbGltaXQgICAgICAgICAgICAgICA9IDAKcXVlcnlfY2FjaGVfc2l6ZSAgICAgICAgICAgICAgICA9IDAKcXVlcnlfY2FjaGVfdHlwZSAgICAgICAgICAgICAgICA9IDAKZXhwaXJlX2xvZ3NfZGF5cyAgICAgICAgICAgICAgICA9IDEwCm1heF9iaW5sb2dfc2l6ZSAgICAgICAgICAgICAgICAgPSAxMDBNCm1heF9jb25uZWN0aW9ucyAgICAgICAgICAgICAgICAgPSA4MTkyCmJhY2tfbG9nICAgICAgICAgICAgICAgICAgICAgICAgPSA0MDk2Cm9wZW5fZmlsZXNfbGltaXQgICAgICAgICAgICAgICAgPSAyMDI0MAppbm5vZGJfb3Blbl9maWxlcyAgICAgICAgICAgICAgID0gMjAyNDAKbWF4X2Nvbm5lY3RfZXJyb3JzICAgICAgICAgICAgICA9IDMwNzIKdGFibGVfb3Blbl9jYWNoZSAgICAgICAgICAgICAgICA9IDQwOTYKdGFibGVfZGVmaW5pdGlvbl9jYWNoZSAgICAgICAgICA9IDQwOTYKdG1wX3RhYmxlX3NpemUgICAgICAgICAgICAgICAgICA9IDFHCm1heF9oZWFwX3RhYmxlX3NpemUgICAgICAgICAgICAgPSAxRwoKbWF4X3N0YXRlbWVudF90aW1lID0gMTAwCgppbm5vZGJfYnVmZmVyX3Bvb2xfc2l6ZSAgICAgICAgID0gMTJHCmlubm9kYl9yZWFkX2lvX3RocmVhZHMgICAgICAgICAgPSA2NAppbm5vZGJfd3JpdGVfaW9fdGhyZWFkcyAgICAgICAgID0gNjQKaW5ub2RiX3RocmVhZF9jb25jdXJyZW5jeSAgICAgICA9IDAKaW5ub2RiX2ZsdXNoX2xvZ19hdF90cnhfY29tbWl0ICA9IDAKaW5ub2RiX2ZsdXNoX21ldGhvZCAgICAgICAgICAgICA9IE9fRElSRUNUCnBlcmZvcm1hbmNlX3NjaGVtYSAgICAgICAgICAgICAgPSAwCmlubm9kYi1maWxlLXBlci10YWJsZSAgICAgICAgICAgPSAxCmlubm9kYl9pb19jYXBhY2l0eSAgICAgICAgICAgICAgPSAyMDAwMAppbm5vZGJfdGFibGVfbG9ja3MgICAgICAgICAgICAgID0gMAppbm5vZGJfbG9ja193YWl0X3RpbWVvdXQgICAgICAgID0gMAoKc3FsX21vZGUgICAgICAgICAgICAgICAgICAgICAgICA9ICJOT19FTkdJTkVfU1VCU1RJVFVUSU9OIgoKW21hcmlhZGJdCgp0aHJlYWRfY2FjaGVfc2l6ZSAgICAgICAgICAgICAgID0gODE5Mgp0aHJlYWRfaGFuZGxpbmcgICAgICAgICAgICAgICAgID0gcG9vbC1vZi10aHJlYWRzCnRocmVhZF9wb29sX3NpemUgICAgICAgICAgICAgICAgPSAxMgp0aHJlYWRfcG9vbF9pZGxlX3RpbWVvdXQgICAgICAgID0gMjAKdGhyZWFkX3Bvb2xfbWF4X3RocmVhZHMgICAgICAgICA9IDEwMjQKCltteXNxbGR1bXBdCnF1aWNrCnF1b3RlLW5hbWVzCm1heF9hbGxvd2VkX3BhY2tldCAgICAgICAgICAgICAgPSAxMjhNCmNvbXBsZXRlLWluc2VydAoKW215c3FsXQoKW2lzYW1jaGtdCmtleV9idWZmZXJfc2l6ZSAgICAgICAgICAgICAgICAgPSAxNk0K==".decode("base64")
@@ -79,7 +79,7 @@ def prepare(rType="MAIN"):
         printc("Installing %s" % rPackage)
         os.system("apt-get install %s -y > /dev/null" % rPackage)
     printc("Installing libpng")
-    os.system("wget --user-agent=\"Mozilla/5.0\" -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb")
+    os.system("wget --user-agent=\"Mozilla/5.0\" -q -O /tmp/libpng12.deb http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI22CKMODS7/libpng12-0_1.2.54-1ubuntu1_amd64.deb")
     os.system("dpkg -i /tmp/libpng12.deb > /dev/null")
     os.system("apt-get install -y > /dev/null") 
     try:
@@ -122,9 +122,9 @@ import zipfile
 def update(rType="MAIN"):
     if rType == "UPDATE":
         printc("Enter the link of release_xyz.zip file:", col.WARNING)
-        rlink = raw_input('Example: https://lofertech.com/mod/update.zip\n\nNow enter the link:\n\n')
+        rlink = raw_input('Example: http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI22CKMODS7/update.zip\n\nNow enter the link:\n\n')
     else:
-        rlink = "https://lofertech.com/mod/update.zip"
+        rlink = "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI22CKMODS7/update.zip"
         printc("Installing Admin Panel")
     hdr = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -240,13 +240,13 @@ def configure():
     except: pass
     if rType == "MAIN": 
       
-        os.system("mv /home/xtreamcodes/iptv_xtream_codes/wwwdir/panel_api.php /home/xtreamcodes/iptv_xtream_codes/wwwdir/.panel_api_original.php && wget -q https://bitbucket.org/emre1393/xtreamui_mirror/downloads/panel_api.php -O /home/xtreamcodes/iptv_xtream_codes/wwwdir/panel_api.php")
-        os.system("mv /home/xtreamcodes/iptv_xtream_codes/wwwdir/player_api.php /home/xtreamcodes/iptv_xtream_codes/wwwdir/.player_api_original.php && wget -q https://bitbucket.org/emre1393/xtreamui_mirror/downloads/player_api.php -O /home/xtreamcodes/iptv_xtream_codes/wwwdir/player_api.php")
+        os.system("mv /home/xtreamcodes/iptv_xtream_codes/wwwdir/panel_api.php /home/xtreamcodes/iptv_xtream_codes/wwwdir/.panel_api_original.php && wget -q http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI22CKMODS7/panel_api.php -O /home/xtreamcodes/iptv_xtream_codes/wwwdir/panel_api.php")
+        os.system("mv /home/xtreamcodes/iptv_xtream_codes/wwwdir/player_api.php /home/xtreamcodes/iptv_xtream_codes/wwwdir/.player_api_original.php && wget -q http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI22CKMODS7/player_api.php -O /home/xtreamcodes/iptv_xtream_codes/wwwdir/player_api.php")
     if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/tv_archive"): os.mkdir("/home/xtreamcodes/iptv_xtream_codes/tv_archive/")
     os.system("ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/")
     os.system("chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb > /dev/null")
-    os.system("wget -q https://bitbucket.org/emre1393/xtreamui_mirror/downloads/GeoLite2.mmdb -O /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
-    os.system("wget -q https://bitbucket.org/emre1393/xtreamui_mirror/downloads/pid_monitor.php -O /home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php")
+    os.system("wget -q http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI22CKMODS7/GeoLite2.mmdb -O /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
+    os.system("wget -q http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI22CKMODS7/pid_monitor.php -O /home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php")
     os.system("chown xtreamcodes:xtreamcodes -R /home/xtreamcodes > /dev/null")
     os.system("chmod -R 0777 /home/xtreamcodes > /dev/null")
     os.system("chattr +i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb > /dev/null")
