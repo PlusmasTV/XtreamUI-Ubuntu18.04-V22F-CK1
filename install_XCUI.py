@@ -3,7 +3,7 @@
 import subprocess, os, random, string, sys, shutil, socket
 from itertools import cycle, izip
 
-rDownloadURL = {"main": "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-22-CK/main_xtreamcodes_reborn.tar.gz", "sub": "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-22-CK/sub_xtreamcodes_reborn.tar.gz"}
+rDownloadURL = {"main": "https://www.dropbox.com/scl/fi/rh4g0w5dj7f2xs6ibaxor/main_xtreamcodes_reborn.tar.gz?dl=1", "sub": "https://www.dropbox.com/scl/fi/m6s5jle9afgtzt48661cr/sub_xtreamcodes_reborn.tar.gz?dl=1"}
 rPackages = ["libcurl3", "libxslt1-dev", "libgeoip-dev", "e2fsprogs", "wget", "mcrypt", "nscd", "htop", "zip", "unzip", "mc", "mysql-server"]
 rInstall = {"MAIN": "main", "LB": "sub"}
 rMySQLCnf = "IyBYdHJlYW0gQ29kZXMKCltjbGllbnRdCnBvcnQgICAgICAgICAgICA9IDMzMDYKCltteXNxbGRfc2FmZV0KbmljZSAgICAgICAgICAgID0gMAoKW215c3FsZF0KdXNlciAgICAgICAgICAgID0gbXlzcWwKcG9ydCAgICAgICAgICAgID0gNzk5OQpiYXNlZGlyICAgICAgICAgPSAvdXNyCmRhdGFkaXIgICAgICAgICA9IC92YXIvbGliL215c3FsCnRtcGRpciAgICAgICAgICA9IC90bXAKbGMtbWVzc2FnZXMtZGlyID0gL3Vzci9zaGFyZS9teXNxbApza2lwLWV4dGVybmFsLWxvY2tpbmcKc2tpcC1uYW1lLXJlc29sdmU9MQoKYmluZC1hZGRyZXNzICAgICAgICAgICAgPSAqCmtleV9idWZmZXJfc2l6ZSA9IDEyOE0KCm15aXNhbV9zb3J0X2J1ZmZlcl9zaXplID0gNE0KbWF4X2FsbG93ZWRfcGFja2V0ICAgICAgPSA2NE0KbXlpc2FtLXJlY292ZXItb3B0aW9ucyA9IEJBQ0tVUAptYXhfbGVuZ3RoX2Zvcl9zb3J0X2RhdGEgPSA4MTkyCnF1ZXJ5X2NhY2hlX2xpbWl0ICAgICAgID0gNE0KcXVlcnlfY2FjaGVfc2l6ZSAgICAgICAgPSAyNTZNCgoKZXhwaXJlX2xvZ3NfZGF5cyAgICAgICAgPSAxMAptYXhfYmlubG9nX3NpemUgICAgICAgICA9IDEwME0KCm1heF9jb25uZWN0aW9ucyAgPSAyMDAwMApiYWNrX2xvZyA9IDQwOTYKb3Blbl9maWxlc19saW1pdCA9IDIwMjQwCmlubm9kYl9vcGVuX2ZpbGVzID0gMjAyNDAKbWF4X2Nvbm5lY3RfZXJyb3JzID0gMzA3Mgp0YWJsZV9vcGVuX2NhY2hlID0gNDA5Ngp0YWJsZV9kZWZpbml0aW9uX2NhY2hlID0gNDA5NgoKCnRtcF90YWJsZV9zaXplID0gMUcKbWF4X2hlYXBfdGFibGVfc2l6ZSA9IDFHCgppbm5vZGJfYnVmZmVyX3Bvb2xfc2l6ZSA9IDEwRwppbm5vZGJfYnVmZmVyX3Bvb2xfaW5zdGFuY2VzID0gMTAKaW5ub2RiX3JlYWRfaW9fdGhyZWFkcyA9IDY0Cmlubm9kYl93cml0ZV9pb190aHJlYWRzID0gNjQKaW5ub2RiX3RocmVhZF9jb25jdXJyZW5jeSA9IDAKaW5ub2RiX2ZsdXNoX2xvZ19hdF90cnhfY29tbWl0ID0gMAppbm5vZGJfZmx1c2hfbWV0aG9kID0gT19ESVJFQ1QKcGVyZm9ybWFuY2Vfc2NoZW1hID0gMAppbm5vZGItZmlsZS1wZXItdGFibGUgPSAxCmlubm9kYl9pb19jYXBhY2l0eT0yMDAwMAppbm5vZGJfdGFibGVfbG9ja3MgPSAwCmlubm9kYl9sb2NrX3dhaXRfdGltZW91dCA9IDAKaW5ub2RiX2RlYWRsb2NrX2RldGVjdCA9IDAKCgpzcWwtbW9kZT0iTk9fRU5HSU5FX1NVQlNUSVRVVElPTiIKCltteXNxbGR1bXBdCnF1aWNrCnF1b3RlLW5hbWVzCm1heF9hbGxvd2VkX3BhY2tldCAgICAgID0gMTZNCgpbbXlzcWxdCgpbaXNhbWNoa10Ka2V5X2J1ZmZlcl9zaXplICAgICAgICAgICAgICA9IDE2TQo=".decode("base64")
@@ -30,11 +30,11 @@ def getVersion():
     except: return ""
 
 def printc(rText, rColour=col.OKBLUE, rPadding=0):
-    print "%s ┌──────────────────────────────────────────┐ %s" % (rColour, col.ENDC)
-    for i in range(rPadding): print "%s │                                          │ %s" % (rColour, col.ENDC)
-    print "%s │ %s%s%s │ %s" % (rColour, " "*(20-(len(rText)/2)), rText, " "*(40-(20-(len(rText)/2))-len(rText)), col.ENDC)
-    for i in range(rPadding): print "%s │                                          │ %s" % (rColour, col.ENDC)
-    print "%s └──────────────────────────────────────────┘ %s" % (rColour, col.ENDC)
+    print "%s â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” %s" % (rColour, col.ENDC)
+    for i in range(rPadding): print "%s â”‚                                          â”‚ %s" % (rColour, col.ENDC)
+    print "%s â”‚ %s%s%s â”‚ %s" % (rColour, " "*(20-(len(rText)/2)), rText, " "*(40-(20-(len(rText)/2))-len(rText)), col.ENDC)
+    for i in range(rPadding): print "%s â”‚                                          â”‚ %s" % (rColour, col.ENDC)
+    print "%s â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ %s" % (rColour, col.ENDC)
     print " "
 
 def prepare(rType="MAIN"):
@@ -51,7 +51,7 @@ def prepare(rType="MAIN"):
         printc("Installing %s" % rPackage)
         os.system("apt-get install %s -y > /dev/null" % rPackage) 
     printc("Installing libpng")
-    os.system("wget -q -O /tmp/libpng12.deb http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-22-CK/libpng12-0_1.2.54-1ubuntu1_amd64.deb")
+    os.system("wget -q -O /tmp/libpng12.deb https://www.dropbox.com/scl/fi/kmewtn5e5y57ucxid8ti3/libpng12-0_1.2.54-1ubuntu1_amd64.deb?dl=1")
     os.system("dpkg -i /tmp/libpng12.deb > /dev/null")
     os.system("apt-get install -y > /dev/null") # Clean up above
     try: os.remove("/tmp/libpng12.deb")
@@ -152,9 +152,9 @@ def configure():
     if not "api.xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    api.xtream-codes.com" >> /etc/hosts')
     if not "downloads.xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    downloads.xtream-codes.com" >> /etc/hosts')
     if not " xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    xtream-codes.com" >> /etc/hosts')
-    os.system('apt-get install unzip e2fsprogs python-paramiko -y && chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb && rm -rf /home/xtreamcodes/iptv_xtream_codes/admin 2>/dev/null && rm -rf /home/xtreamcodes/iptv_xtream_codes/pytools 2>/dev/null && wget -q "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-22-CK/update.zip" -O /tmp/update.zip -o /dev/null && unzip /tmp/update.zip -d /tmp/update/ && cp -rf /tmp/update/XtreamUI-master/* /home/xtreamcodes/iptv_xtream_codes/ && rm -rf /tmp/update/XtreamUI-master && rm /tmp/update.zip && rm -rf /tmp/update  && chown -R xtreamcodes:xtreamcodes /home/xtreamcodes/ && chmod +x /home/xtreamcodes/iptv_xtream_codes/permissions.sh && /home/xtreamcodes/iptv_xtream_codes/permissions.sh && find /home/xtreamcodes/ -type d -not \( -name .update -prune \) -exec chmod -R 777 {} +')
+    os.system('apt-get install unzip e2fsprogs python-paramiko -y && chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb && rm -rf /home/xtreamcodes/iptv_xtream_codes/admin 2>/dev/null && rm -rf /home/xtreamcodes/iptv_xtream_codes/pytools 2>/dev/null && wget -q "https://www.dropbox.com/scl/fi/zuww1hbepi204zkexvdqt/update.zip?dl=1" -O /tmp/update.zip -o /dev/null && unzip /tmp/update.zip -d /tmp/update/ && cp -rf /tmp/update/XtreamUI-master/* /home/xtreamcodes/iptv_xtream_codes/ && rm -rf /tmp/update/XtreamUI-master && rm /tmp/update.zip && rm -rf /tmp/update  && chown -R xtreamcodes:xtreamcodes /home/xtreamcodes/ && chmod +x /home/xtreamcodes/iptv_xtream_codes/permissions.sh && /home/xtreamcodes/iptv_xtream_codes/permissions.sh && find /home/xtreamcodes/ -type d -not \( -name .update -prune \) -exec chmod -R 777 {} +')
     os.system("sed -i 's|echo \"Xtream Codes Reborn\";|header(\"Location: https://www.google.com/\");|g' /home/xtreamcodes/iptv_xtream_codes/wwwdir/index.php")
-    os.system("sudo wget -q http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-22-CK/youtube-dl -O /usr/local/bin/youtube-dl")
+    os.system("sudo wget -q https://www.dropbox.com/scl/fi/bv8uawrht8d3fd19ej1ax/youtube-dl?dl=1 -O /usr/local/bin/youtube-dl")
     os.system("sudo chmod a+rx /usr/local/bin/youtube-dl")
 
 def start(first=True):
@@ -175,7 +175,7 @@ def modifyNginx():
         rFile.close()
 
 if __name__ == "__main__":
-    printc("XtreamUI CK41 MOD", col.OKGREEN, 2)
+    printc("Xtream UI 22 CK MODS - Installer", col.OKGREEN, 2)
     rType = raw_input("  Installation Type [MAIN, LB]: ")
     print " "
     if rType.upper() in ["MAIN", "LB"]:
@@ -204,7 +204,7 @@ if __name__ == "__main__":
                 configure()
                 if rType.upper() == "MAIN": modifyNginx()
                 start()
-                printc("XtreamUI CK41 MOD", col.OKGREEN, 2)
+                printc("Xtream UI 22 CK MODS completed!", col.OKGREEN, 2)
                 printc("Admin UI: http://%s:25500" % getIP())
                 if rType.upper() == "MAIN":
                     printc("Please store your MySQL password!")
