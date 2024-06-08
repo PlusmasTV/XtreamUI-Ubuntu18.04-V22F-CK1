@@ -7,12 +7,16 @@ This is an installation mirror for xtream ui software.
 
 update your ubuntu first, then install panel  
 
+
+
 I) TERMINAL COMO SUPER ADMINISTRADOR:
 
 sudo su
 apt-get upgrade
 apt-get update
 apt install net-tools
+
+
 
 
 II) ADICIONAR MIRROR PARA ACTUALIZAR REPOSITORIOS/PAQUETES:
@@ -22,6 +26,8 @@ nano /etc/apt/sources.list (nota: anadir esta linea :
 deb http://mirrors.us.kernel.org/ubuntu/ xenial main
 sudo apt-get update
 sudo apt-get install libpng12-0
+
+
 
 
 III) TERMINAL COMO SUPER ADMINISTRADOR:
