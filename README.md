@@ -16,8 +16,8 @@ update your ubuntu first, then install panel
 - sudo apt-get update
 - sudo apt-get install libpng12-0
 - sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libxslt1-dev libcurl3 libgeoip-dev python -y;
-- wget https://raw.githubusercontent.com/PlusmasTV/XtreamUI-Ubuntu18.04/main/install_XCUI.py; 
-- sudo python install_XCUI.py  
+- wget https://raw.githubusercontent.com/PlusmasTV/XtreamUI-Ubuntu18.04/main/install.py; 
+- sudo python install.py  
 
   
 If you want to install main server with admin panel, choose MAIN.  
