@@ -16,7 +16,7 @@ update your ubuntu first, then install panel
 - sudo apt-get update
 - sudo apt-get install libpng12-0
 - sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libxslt1-dev libcurl3 libgeoip-dev python -y;
-- wget https://raw.githubusercontent.com/PlusmasTV/XtreamUI-Ubuntu18.04/main/install.py; 
+- wget https://raw.githubusercontent.com/PlusmasTV/XtreamUI-Ubuntu18.04-V22-CK7/main/install.py; 
 - sudo python install.py  
 
   
