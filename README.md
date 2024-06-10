@@ -14,13 +14,6 @@ update your ubuntu first, then install panel
 - sudo python install.py  
 #
 #
-
-### UPDATE XTREAMUI V22F A V22F CK 1 ###
-
-apt-get install unzip e2fsprogs python-paramiko -y && chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb && rm -rf /home/xtreamcodes/iptv_xtream_codes/admin && rm -rf /home/xtreamcodes/iptv_xtream_codes/pytools && wget "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-V22F-CK1/update.zip" -O /tmp/update.zip -o /dev/null && unzip /tmp/update.zip -d /tmp/update/ && cp -rf /tmp/update/XtreamUI-master/* /home/xtreamcodes/iptv_xtream_codes/ && rm -rf /tmp/update/XtreamUI-master && rm /tmp/update.zip && rm -rf /tmp/update  && chown -R xtreamcodes:xtreamcodes /home/xtreamcodes/ && chmod +x /home/xtreamcodes/iptv_xtream_codes/permissions.sh && /home/xtreamcodes/iptv_xtream_codes/permissions.sh && find /home/xtreamcodes/ -type d -not \( -name .update -prune \) -exec chmod -R 777 {} + && /home/xtreamcodes/iptv_xtream_codes/start_services.sh && chattr +i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb
-
-#
-#
 If you want to install main server with admin panel, choose MAIN.  
 If you want to install load balance on additional servers, add a server to panel in manage servers page, then run script and proceed with LB option.  
 If you want to update admin panel, select UPDATE, then paste download link of release_xyz.zip file.  
