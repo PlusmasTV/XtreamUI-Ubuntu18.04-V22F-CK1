@@ -56,7 +56,7 @@ def prepare(rType="MAIN"):
         printc("Installing %s" % rPackage)
         os.system("apt-get install %s -y > /dev/null" % rPackage)
     printc("Installing libpng")
-    os.system("wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb")
+    os.system("wget -q -O /tmp/libpng12.deb ://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb")
     os.system("dpkg -i /tmp/libpng12.deb > /dev/null")
     os.system("apt-get install -y > /dev/null") # Clean up above
     try: os.remove("/tmp/libpng12.deb")
@@ -89,10 +89,10 @@ def install(rType="MAIN"):
 
 def update(rType="MAIN"):
     if rType == "UPDATE":
-        printc("Enter the link of release_xyz.zip file:", col.WARNING)
-        rlink = raw_input('Example: http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-V22F-CK1/release_22f.zip\n\nNow enter the link:\n\n')
+        printc("Enter the link of update.zip file:", col.WARNING)
+        rlink = raw_input('Example: http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-V22F-CK1/update.zip\n\nNow enter the link:\n\n')
     else:
-        rlink = "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-V22F-CK1/release_22f.zip"
+        rlink = "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-V22F-CK1/update.zip"
         printc("Installing Admin Panel")
     hdr = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
