@@ -89,10 +89,10 @@ def install(rType="MAIN"):
 
 def update(rType="MAIN"):
     if rType == "UPDATE":
-        printc("Enter the link of release_xxx.zip file:", col.WARNING)
-        rlink = raw_input('Example: http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-V22F-CK1/release_22f.zip\n\nNow enter the link:\n\n')
+        printc("Enter the link of update.zip file:", col.WARNING)
+        rlink = raw_input('Example: http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-V22F-CK1/update.zip\n\nNow enter the link:\n\n')
     else:
-        rlink = "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-V22F-CK1/release_22f.zip"
+        rlink = "http://46.175.149.24/xtreamui/ubuntu18.04/XtreamUI-V22F-CK1/update.zip"
         printc("Installing Admin Panel")
     hdr = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
